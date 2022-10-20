@@ -6,17 +6,19 @@ using UnityEngine.SceneManagement;
 
 public class CrashDetector : MonoBehaviour
 {
+    [SerializeField] private float reloadDelay;
+    
     private const string GroundTag = "Ground";
 
     private void OnTriggerEnter2D(Collider2D col)
     {
         if (col.CompareTag(GroundTag))
         {
-            Invoke(nameof(ReloadScene), 2);
+            Invoke(nameof(ReloadScene), reloadDelay);
         }
     }
     
-    private static void ReloadScene()
+    private void ReloadScene()
     {
         SceneManager.LoadScene(0);
     }
