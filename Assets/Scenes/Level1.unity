@@ -5383,10 +5383,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1eb95d2933f2b3a4d900f4ae7affcdc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  torqueAmount: 15
+  torqueAmount: 30
   baseSpeed: 20
   boostSpeed: 30
-  isGameOver: {fileID: 11400000, guid: 60312d6fcf8cbe546af6a99c8091f185, type: 2}
 --- !u!114 &253020951
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5536,9 +5535,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca1e26b1580e60b43ae25ece7ac0b078, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameResult: 0
-  reloadDelay: 0
-  checkingTag: 
+  reloadDelay: 1.5
 --- !u!1 &271798730
 GameObject:
   m_ObjectHideFlags: 0
