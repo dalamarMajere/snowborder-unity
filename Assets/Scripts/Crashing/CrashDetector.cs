@@ -1,32 +1,35 @@
+using System;
+using Audio;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Variables;
 
 namespace Player
 {
     public class CrashDetector : MonoBehaviour
     {
+        public event Action OnCrashed;
+        
         [SerializeField] private float reloadDelay;
-        [SerializeField] private ParticleSystem crashParticleSystem;
-        [SerializeField] private AudioClip crashSFX;
+        [SerializeField] private BooleanVariable isGameOverVariable;
 
-        private AudioSource _audioSource;
         private const string GroundTag = "Ground";
-
-        private void Start()
-        {
-            _audioSource = GetComponent<AudioSource>();
-        }
 
         private void OnTriggerEnter2D(Collider2D col)
         {
-            if (col.CompareTag(GroundTag))
+            if (col.CompareTag(GroundTag) && !isGameOverVariable.Value)
             {
-                crashParticleSystem.Play();
-                _audioSource.PlayOneShot(crashSFX);
+                MarkGameAsOver();
+                OnCrashed?.Invoke();
                 Invoke(nameof(ReloadScene), reloadDelay);
             }
         }
-    
+
+        private void MarkGameAsOver()
+        {
+            isGameOverVariable.Value = true;
+        }
+
         private void ReloadScene()
         {
             SceneManager.LoadScene(0);

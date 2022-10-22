@@ -1,4 +1,5 @@
 using UnityEngine;
+using Variables;
 
 namespace Player
 {
@@ -7,6 +8,8 @@ namespace Player
         [SerializeField] private float torqueAmount;
         [SerializeField] private float baseSpeed;
         [SerializeField] private float boostSpeed;
+
+        [SerializeField] private BooleanVariable isGameOver;
     
         private Rigidbody2D rigidBody2D;
         private SurfaceEffector2D surfaceEffector2D;
@@ -15,10 +18,16 @@ namespace Player
         {
             rigidBody2D = GetComponent<Rigidbody2D>();
             surfaceEffector2D = FindObjectOfType<SurfaceEffector2D>();
+            isGameOver.Value = false;
         }
 
         private void Update()
         {
+            if (isGameOver.Value)
+            {
+                return;
+            }
+            
             RotatePlayer();
             Boost();
         }
