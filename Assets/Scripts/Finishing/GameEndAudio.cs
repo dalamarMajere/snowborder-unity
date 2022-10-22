@@ -1,8 +1,6 @@
-using Effects;
-using Unity.VisualScripting;
 using UnityEngine;
 
-namespace Audio
+namespace Finishing
 {
     [RequireComponent(typeof(GameEnd))]
     public class GameEndAudio : MonoBehaviour

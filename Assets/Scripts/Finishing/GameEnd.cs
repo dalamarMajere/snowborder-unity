@@ -1,9 +1,8 @@
 using System;
-using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace Effects
+namespace Finishing
 {
     public enum GameResult
     {

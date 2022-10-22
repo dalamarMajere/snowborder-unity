@@ -1,3 +1,4 @@
+using Finishing;
 using UnityEngine;
 
 namespace Player
@@ -11,14 +12,23 @@ namespace Player
         private Rigidbody2D rigidBody2D;
         private SurfaceEffector2D surfaceEffector2D;
 
+        private bool _isEnabled;
+
         private void Start()
         {
             rigidBody2D = GetComponent<Rigidbody2D>();
+            //TODO: get rid of!
             surfaceEffector2D = FindObjectOfType<SurfaceEffector2D>();
+            GetComponent<GameEnd>().OnGameOver += (_) => _isEnabled = false;
         }
 
         private void Update()
         {
+            if (!_isEnabled)
+            {
+                return;
+            }
+            
             RotatePlayer();
             Boost();
         }

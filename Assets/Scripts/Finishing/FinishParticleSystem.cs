@@ -1,8 +1,6 @@
-﻿using Player;
-using UnityEditor;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace Effects
+namespace Finishing
 {
     [RequireComponent(typeof(GameEnd))]
     public class FinishParticleSystem : MonoBehaviour
