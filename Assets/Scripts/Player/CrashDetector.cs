@@ -1,24 +1,35 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class CrashDetector : MonoBehaviour
+namespace Player
 {
-    [SerializeField] private float reloadDelay;
-    [SerializeField] private ParticleSystem crashParticleSystem;
-    
-    private const string GroundTag = "Ground";
+    public class CrashDetector : MonoBehaviour
+    {
+        [SerializeField] private float reloadDelay;
+        [SerializeField] private ParticleSystem crashParticleSystem;
+        [SerializeField] private AudioClip crashSFX;
 
-    private void OnTriggerEnter2D(Collider2D col)
-    {
-        if (col.CompareTag(GroundTag))
+        private AudioSource _audioSource;
+        private const string GroundTag = "Ground";
+
+        private void Start()
         {
-            crashParticleSystem.Play();
-            Invoke(nameof(ReloadScene), reloadDelay);
+            _audioSource = GetComponent<AudioSource>();
         }
-    }
+
+        private void OnTriggerEnter2D(Collider2D col)
+        {
+            if (col.CompareTag(GroundTag))
+            {
+                crashParticleSystem.Play();
+                _audioSource.PlayOneShot(crashSFX);
+                Invoke(nameof(ReloadScene), reloadDelay);
+            }
+        }
     
-    private void ReloadScene()
-    {
-        SceneManager.LoadScene(0);
+        private void ReloadScene()
+        {
+            SceneManager.LoadScene(0);
+        }
     }
 }

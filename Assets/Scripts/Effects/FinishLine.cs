@@ -1,24 +1,30 @@
+using Audio;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class FinishLine : MonoBehaviour
+namespace Effects
 {
-    [SerializeField] private float reloadDelay;
-    [SerializeField] private ParticleSystem finishParticleSystem;
-    
-    private const string PlayerTag = "Player";
-    
-    private void OnTriggerEnter2D(Collider2D col)
+    public class FinishLine : MonoBehaviour
     {
-        if (col.CompareTag(PlayerTag))
+        [SerializeField] private float reloadDelay;
+        [SerializeField] private ParticleSystem finishParticleSystem;
+        [SerializeField] private FinishLineAudio finishLineAudio;
+    
+        private const string PlayerTag = "Player";
+    
+        private void OnTriggerEnter2D(Collider2D col)
         {
-            finishParticleSystem.Play();
-            Invoke(nameof(ReloadScene), reloadDelay);
+            if (col.CompareTag(PlayerTag))
+            {
+                finishParticleSystem.Play();
+                finishLineAudio.Play();
+                Invoke(nameof(ReloadScene), reloadDelay);
+            }
         }
-    }
 
-    private void ReloadScene()
-    {
-        SceneManager.LoadScene(0);
+        private void ReloadScene()
+        {
+            SceneManager.LoadScene(0);
+        }
     }
 }
