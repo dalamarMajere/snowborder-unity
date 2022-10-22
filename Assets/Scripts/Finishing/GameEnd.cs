@@ -1,7 +1,7 @@
 using System;
+using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using Variables;
 
 namespace Effects
 {
@@ -15,21 +15,36 @@ namespace Effects
     {
         public event Action<GameResult> OnGameOver;
 
-        [SerializeField] private GameResult gameResult;
-        
         [SerializeField] private float reloadDelay;
-        [SerializeField] private string checkingTag;
-
+        
         private bool isGameOver;
+
+        private const string GroundTag = "Ground";
+        private const string FinishTag = "Finish";
         
         private void OnTriggerEnter2D(Collider2D col)
         {
-            if (col.CompareTag(checkingTag) && !isGameOver)
+            if (isGameOver)
             {
-                OnGameOver?.Invoke(gameResult);
-                isGameOver = true;
-                Invoke(nameof(ReloadScene), reloadDelay);
+                return;
             }
+            
+            if (col.CompareTag(GroundTag))
+            {
+                GameOver(GameResult.Lose);
+            }
+
+            if (col.CompareTag(FinishTag))
+            {
+                GameOver(GameResult.Win);
+            }
+        }
+
+        private void GameOver(GameResult gameResult)
+        {
+            OnGameOver?.Invoke(gameResult);
+            isGameOver = true;
+            Invoke(nameof(ReloadScene), reloadDelay);
         }
 
 
