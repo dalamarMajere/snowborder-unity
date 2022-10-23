@@ -8,7 +8,8 @@ namespace Player
         [SerializeField] private float torqueAmount;
         [SerializeField] private float baseSpeed;
         [SerializeField] private float boostSpeed;
-
+        [SerializeField] private FloatVariable surfaceSpeedVariable;
+        
         private Rigidbody2D rigidBody2D;
         private SurfaceEffector2D surfaceEffector2D;
 
@@ -17,8 +18,6 @@ namespace Player
         private void Start()
         {
             rigidBody2D = GetComponent<Rigidbody2D>();
-            //TODO: get rid of!
-            surfaceEffector2D = FindObjectOfType<SurfaceEffector2D>();
             GetComponent<GameEnd>().OnGameOver += (_) => _isDisabled = true;
         }
 
@@ -35,7 +34,7 @@ namespace Player
 
         private void Boost()
         {
-            surfaceEffector2D.speed = Input.GetKey(KeyCode.UpArrow) ? boostSpeed : baseSpeed;
+            surfaceSpeedVariable.Value = Input.GetKey(KeyCode.UpArrow) ? boostSpeed : baseSpeed;
         }
 
         private void RotatePlayer()

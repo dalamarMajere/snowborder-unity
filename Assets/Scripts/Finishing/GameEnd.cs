@@ -1,4 +1,5 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -17,6 +18,7 @@ namespace Finishing
         [SerializeField] private float reloadDelay;
         
         private bool isGameOver;
+        private GameResult _gameResult;
 
         private const string GroundTag = "Ground";
         private const string FinishTag = "Finish";
@@ -49,7 +51,13 @@ namespace Finishing
 
         private void ReloadScene()
         {
-            SceneManager.LoadScene(0);
+            if (_gameResult == GameResult.Lose)
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+                return;
+            }
+            
+            SceneManager.LoadScene(Math.Min(SceneManager.sceneCountInBuildSettings - 1, SceneManager.GetActiveScene().buildIndex + 1));
         }
     }
 }
