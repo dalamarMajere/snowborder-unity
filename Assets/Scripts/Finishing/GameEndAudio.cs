@@ -18,17 +18,7 @@ namespace Finishing
 
         private void OnDestroy()
         {
-            GetComponent<GameEnd>().OnGameOver -= Play;
-        }
-
-        private void AssignCallback()
-        {
-            GetComponent<GameEnd>().OnGameOver += Play;
-        }
-
-        private void GetComponents()
-        {
-            _audioSource = GetComponent<AudioSource>();
+            UnassignCallback();
         }
         
         private void Play(GameResult gameResult)
@@ -41,6 +31,21 @@ namespace Finishing
             {
                 _audioSource.PlayOneShot(loseSFX);
             }
+        }
+
+        private void AssignCallback()
+        {
+            GetComponent<GameEnd>().OnGameOver += Play;
+        }
+        
+        private void UnassignCallback()
+        {
+            GetComponent<GameEnd>().OnGameOver -= Play;
+        }
+
+        private void GetComponents()
+        {
+            _audioSource = GetComponent<AudioSource>();
         }
     }
 }

@@ -15,12 +15,7 @@ namespace Finishing
 
         private void OnDestroy()
         {
-            GetComponent<GameEnd>().OnGameOver -= PlayParticle;
-        }
-        
-        private void AssignCallback()
-        {
-            GetComponent<GameEnd>().OnGameOver += PlayParticle;
+            UnassignCallback();
         }
         
         private void PlayParticle(GameResult gameResult)
@@ -35,5 +30,14 @@ namespace Finishing
             }
         }
 
+        private void UnassignCallback()
+        {
+            GetComponent<GameEnd>().OnGameOver -= PlayParticle;
+        }
+
+        private void AssignCallback()
+        {
+            GetComponent<GameEnd>().OnGameOver += PlayParticle;
+        }
     }
 }

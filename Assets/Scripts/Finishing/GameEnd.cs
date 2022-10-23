@@ -1,23 +1,16 @@
 using System;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace Finishing
 {
-    public enum GameResult
-    {
-        Win, 
-        Lose
-    }
-    
     public class GameEnd : MonoBehaviour
     {
         public event Action<GameResult> OnGameOver;
 
         [SerializeField] private float reloadDelay;
         
-        private bool isGameOver;
+        private bool _isGameOver;
         private GameResult _gameResult;
 
         private const string GroundTag = "Ground";
@@ -25,7 +18,7 @@ namespace Finishing
         
         private void OnTriggerEnter2D(Collider2D col)
         {
-            if (isGameOver)
+            if (_isGameOver)
             {
                 return;
             }
@@ -33,6 +26,7 @@ namespace Finishing
             if (col.CompareTag(GroundTag))
             {
                 GameOver(GameResult.Lose);
+                return;
             }
 
             if (col.CompareTag(FinishTag))
@@ -43,11 +37,10 @@ namespace Finishing
 
         private void GameOver(GameResult gameResult)
         {
+            _isGameOver = true;
             OnGameOver?.Invoke(gameResult);
-            isGameOver = true;
             Invoke(nameof(ReloadScene), reloadDelay);
         }
-
 
         private void ReloadScene()
         {
