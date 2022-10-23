@@ -9,6 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6192ee30629e4c6db4e0dcdcda6424b4, type: 3}
-  m_Name: IsGameOver
+  m_Script: {fileID: 11500000, guid: c884b640eb464554851fb38acc85ead7, type: 3}
+  m_Name: SurfaceSpeedVariable
   m_EditorClassIdentifier: 
