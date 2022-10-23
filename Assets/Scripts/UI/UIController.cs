@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class UIController : MonoBehaviour
 {
+    [SerializeField] private float secondsToShowText;
+    
     private TextMeshProUGUI[] tutorials;
     
     private void Start()
@@ -37,7 +39,7 @@ public class UIController : MonoBehaviour
         {
             textMeshProUGUI.gameObject.SetActive(true);
 
-            yield return new WaitForSeconds(4);
+            yield return new WaitForSeconds(secondsToShowText);
         
             textMeshProUGUI.gameObject.SetActive(false);
         }
