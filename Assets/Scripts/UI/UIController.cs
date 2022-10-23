@@ -1,6 +1,4 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -8,11 +6,11 @@ public class UIController : MonoBehaviour
 {
     [SerializeField] private float secondsToShowText;
     
-    private TextMeshProUGUI[] tutorials;
+    private TextMeshProUGUI[] _tutorials;
     
     private void Start()
     {
-        tutorials = GetComponentsInChildren<TextMeshProUGUI>();
+        _tutorials = GetComponentsInChildren<TextMeshProUGUI>();
         
         DisableAll();
 
@@ -21,7 +19,7 @@ public class UIController : MonoBehaviour
 
     private void DisableAll()
     {
-        foreach (var textMeshProUGUI in tutorials)
+        foreach (var textMeshProUGUI in _tutorials)
         {
             textMeshProUGUI.gameObject.SetActive(false);
         }
@@ -30,18 +28,27 @@ public class UIController : MonoBehaviour
     private void StartTutorial()
     {
         StartCoroutine(ShowText());
-        
     }
 
     private IEnumerator ShowText()
     {
-        foreach (var textMeshProUGUI in tutorials)
+        foreach (var textMeshProUGUI in _tutorials)
         {
-            textMeshProUGUI.gameObject.SetActive(true);
+            EnableText(textMeshProUGUI);
 
             yield return new WaitForSeconds(secondsToShowText);
         
-            textMeshProUGUI.gameObject.SetActive(false);
+            DisableText(textMeshProUGUI);
         }
+    }
+
+    private void EnableText(TextMeshProUGUI textMeshProUGUI)
+    {
+        textMeshProUGUI.gameObject.SetActive(true);
+    }
+    
+    private static void DisableText(TextMeshProUGUI textMeshProUGUI)
+    {
+        textMeshProUGUI.gameObject.SetActive(false);
     }
 }

@@ -10,14 +10,14 @@ namespace Player
         [SerializeField] private float boostSpeed;
         [SerializeField] private FloatVariable surfaceSpeedVariable;
         
-        private Rigidbody2D rigidBody2D;
-        private SurfaceEffector2D surfaceEffector2D;
+        private Rigidbody2D _rigidBody2D;
+        private SurfaceEffector2D _surfaceEffector2D;
 
         private bool _isDisabled;
 
         private void Start()
         {
-            rigidBody2D = GetComponent<Rigidbody2D>();
+            _rigidBody2D = GetComponent<Rigidbody2D>();
             GetComponent<GameEnd>().OnGameOver += (_) => _isDisabled = true;
         }
 
@@ -41,11 +41,11 @@ namespace Player
         {
             if (Input.GetKey(KeyCode.LeftArrow))
             {
-                rigidBody2D.AddTorque(torqueAmount);
+                _rigidBody2D.AddTorque(torqueAmount);
             }
             else if (Input.GetKey(KeyCode.RightArrow))
             {
-                rigidBody2D.AddTorque(-torqueAmount);
+                _rigidBody2D.AddTorque(-torqueAmount);
             }
         }
     }
