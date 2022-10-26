@@ -1,4 +1,8 @@
+#region
+
 using UnityEngine;
+
+#endregion
 
 namespace Finishing
 {
@@ -7,9 +11,9 @@ namespace Finishing
     {
         [SerializeField] private AudioClip winSFX;
         [SerializeField] private AudioClip loseSFX;
-        
+
         private AudioSource _audioSource;
-    
+
         private void Start()
         {
             AssignCallback();
@@ -20,7 +24,7 @@ namespace Finishing
         {
             UnassignCallback();
         }
-        
+
         private void Play(GameResult gameResult)
         {
             if (gameResult == GameResult.Win)

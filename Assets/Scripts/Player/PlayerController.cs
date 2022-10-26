@@ -1,5 +1,9 @@
+#region
+
 using Finishing;
 using UnityEngine;
+
+#endregion
 
 namespace Player
 {
@@ -9,16 +13,16 @@ namespace Player
         [SerializeField] private float baseSpeed;
         [SerializeField] private float boostSpeed;
         [SerializeField] private FloatVariable surfaceSpeedVariable;
-        
-        private Rigidbody2D _rigidBody2D;
-        private SurfaceEffector2D _surfaceEffector2D;
 
         private bool _isDisabled;
+
+        private Rigidbody2D _rigidBody2D;
+        private SurfaceEffector2D _surfaceEffector2D;
 
         private void Start()
         {
             _rigidBody2D = GetComponent<Rigidbody2D>();
-            GetComponent<GameEnd>().OnGameOver += (_) => _isDisabled = true;
+            GetComponent<GameEnd>().OnGameOver += _ => _isDisabled = true;
         }
 
         private void Update()
@@ -27,7 +31,7 @@ namespace Player
             {
                 return;
             }
-            
+
             RotatePlayer();
             Boost();
         }
